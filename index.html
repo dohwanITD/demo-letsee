@@ -5,10 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <title>003</title>
 
-    <!-- THREE.js must be supplied -->
-    <script src="https://unpkg.com/three@0.123.0/build/three.min.js"></script>
-    <script src="https://unpkg.com/three@0.123.0/examples/js/loaders/OBJLoader.js"></script>
-    <script src="https://unpkg.com/three@0.123.0/examples/js/loaders/MTLLoader.js"></script>
+     <!-- THREE.js must be supplied -->
+     <script src="https://unpkg.com/three@0.123.0/build/three.min.js"></script>
+     <script src="https://unpkg.com/three@0.123.0/examples/js/loaders/GLTFLoader.js"></script>
 
     <!-- Replace the app key here with your own app key -->
     <script src="https://developer.letsee.io/api/webar?key=df3cf2514893523f0b3a865debb9e65cf6b42741f1ba19a557c950a7fd77ed82"></script>
@@ -18,27 +17,23 @@
 
 <!-- Loading the Letsee Engine -->
 <script>
-
     let scene,
         camera,
         renderer,
         ambientLight,
         directionalLight,
-        materials,
         mesh,
+        animations,
         mixer,
+        entity,
         clock = new THREE.Clock();
+    let loader = new THREE.GLTFLoader();
 
     letsee.ready(() => {
         letsee.start();
 
         // Activate THREE.js library
         letsee.addTHREE(THREE).then(obj => {
-            camera = obj.camera;
-            renderer = obj.renderer;
-            scene = obj.scene;
-
-            // Initialize 3D world
             create3DWorld(obj);
         });
     });
@@ -55,62 +50,31 @@
         console.error(e);
     };
 
-    /**
-     * 1. Load model.
-     * 2. Play model animation.
-     */
-    const loadModel = (mtlPath, objPath) => {
-        return new Promise((resolve) => {
-            // Instantiate mtlLoader
-            let mtlLoader = new THREE.MTLLoader();
-            mtlLoader.load(mtlPath, (_materials) => {
-                materials = _materials;
-                // Preload the materials
-                materials.preload();
-
-                let objLoader = new THREE.OBJLoader();
-                objLoader.setMaterials(materials);
-                objLoader.load(objPath, (obj) => {
-
-                    obj.position.set(0, 0, 30);
-                    obj.scale.setScalar(1);
-                    obj.rotateY(Math.PI/180 * 60);
-                    obj.add(new THREE.AxesHelper(300));
-
-                    resolve(obj);
-                }, onProgress, onError)
-
-            })
-        })
-
-    }
-
     const create3DWorld = (obj) => {
         renderer = obj.renderer;
         scene = obj.scene;
 
-        // 1. Add lights
         ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
         ambientLight.position.set(0, 0, 0);
         scene.add(ambientLight);
 
-        directionalLight = new THREE.DirectionalLight(0xffffff, 2.5);
-        directionalLight.position.set(-0.5, 0.5, 0.866);
-        directionalLight.castShadow = false;
-        directionalLight.shadow.mapSize = new THREE.Vector2(512, 512);
+        directionalLight = new THREE.DirectionalLight(0xffffff);
+        directionalLight.position.set(0, -95, 120);
         scene.add(directionalLight);
 
-        // 2. Set light effects for renderer
-        renderer.toneMappingExposure = 1;
-        renderer.toneMapping = 0;
-        renderer.gammaFactor = 2;
-        renderer.outputEncoding = THREE.sRGBEncoding;
-        renderer.physicallyCorrectLights=true;
+        letsee.addTarget('https://developer.letsee.io/api-tm/target-manager/target-uid/641957115473724020fb53ca').then(_entity => {
+            entity = _entity;
 
-        letsee.addTarget('[YOUR_TARGET_URI]').then(entity => {
-
-            // 1. Load model
-            loadModel('[YOUR_MTL_URI]', '[YOUR_OBJ_MODEL_URI]')
+            const geometry = new THREE.BoxGeometry();
+            const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+            const cube = new THREE.Mesh( geometry, material );
+            cube.scale.set(20, 20, 20);
+            cube.position.z = 50;
+            entity.add(cube);
+                    
+            scene.add(entity);
+            
+            loadModel('./models/ar_taewon.glb')
                 .then(model => {
                     mesh = model;
 
@@ -139,8 +103,31 @@
 
             animate();
         });
+    }
 
-    };
+    const loadModel = (path) => {
+        return new Promise((resolve) => {
+            loader.load(path, function (gltf) {
+
+                mesh = gltf.scene;
+                animations = gltf.animations;
+
+                mesh.position.y = 0;
+                mesh.position.x = -10;
+                mesh.scale.setScalar(30);
+
+                // Play model's animation
+                if (animations.length) {
+                    mixer = new THREE.AnimationMixer(mesh);
+                    let action = mixer.clipAction(animations[1]);
+                    action.play();
+                } else console.warn(`Model does not have animation`);
+
+                resolve(mesh);
+
+            }, onProgress, onError);
+        });
+    }
 
 </script>
 
