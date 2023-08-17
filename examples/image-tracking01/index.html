@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <title>003</title>
+
+     <!-- THREE.js must be supplied -->
+     <script src="https://unpkg.com/three@0.123.0/build/three.min.js"></script>
+     <script src="https://unpkg.com/three@0.123.0/examples/js/loaders/GLTFLoader.js"></script>
+
+    <!-- Replace the app key here with your own app key -->
+    <script src="https://developer.letsee.io/api/webar?key=df3cf2514893523f0b3a865debb9e65cf6b42741f1ba19a557c950a7fd77ed82"></script>
+
+</head>
+<body>
+
+<!-- Loading the Letsee Engine -->
+<script>
+    let scene,
+        camera,
+        renderer,
+        ambientLight,
+        directionalLight,
+        mesh,
+        animations,
+        mixer,
+        entity,
+        clock = new THREE.Clock();
+    let loader = new THREE.GLTFLoader();
+
+    letsee.ready(() => {
+        letsee.start();
+
+        // Activate THREE.js library
+        letsee.addTHREE(THREE).then(obj => {
+            create3DWorld(obj);
+        });
+    });
+    letsee.init();
+
+    const onProgress = (xhr) => {
+        if (xhr.lengthComputable) {
+            const percentComplete = xhr.loaded / xhr.total * 100;
+            console.warn(Math.round(percentComplete) + '%');
+        }
+    };
+
+    const onError = (e) => {
+        console.error(e);
+    };
+
+    const create3DWorld = (obj) => {
+        renderer = obj.renderer;
+        scene = obj.scene;
+
+        ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+        ambientLight.position.set(0, 0, 0);
+        scene.add(ambientLight);
+
+        directionalLight = new THREE.DirectionalLight(0xffffff);
+        directionalLight.position.set(0, -95, 120);
+        scene.add(directionalLight);
+
+        letsee.addTarget('https://api.letsee.io/targets/target-manager/target-uid/64dd62553df93503ac4b861c').then(_entity => {
+            entity = _entity;
+
+            // let dom = document.createElement('div');
+            // dom.id = 'container';
+
+            // let img = document.createElement('img');
+            // img.id = 'image_01';
+            // img.src = './images/Prewrite_00.png';
+            // img.width = 30;
+            // img.height = 60;
+            
+            // img.position = 'absolute';
+            // // img.style.transform = ('translate(-50%, -50%)');
+            // img.style.top  = '50%';
+            // img.style.left = '25%';
+
+            // dom.appendChild(img);
+            // /* XRElement 생성 */
+            // let xrElement = letsee.createXRElement(dom);
+            // /* XRElement 의 entity 바인딩 */
+            // letsee.bindXRElement(xrElement, entity);
+
+            // Create a texture loader so we can load our image file
+            const loader = new THREE.TextureLoader();
+
+            // Load an image file into a custom material
+            const texMaterial = new THREE.MeshLambertMaterial({
+            map: loader.load('./images/targets-081603.png')
+            });
+
+            // create a plane geometry for the image with a width of 10
+            // and a height that preserves the image's aspect ratio
+            const texGeometry = new THREE.PlaneGeometry(30, 60);
+
+            // combine our image geometry and material into a mesh
+            const texMesh = new THREE.Mesh(texGeometry, texMaterial);
+
+            // set the position of the image mesh in the x,y,z dimensions
+            texMesh.position.set(35,0,0)
+
+            entity.add(texMesh);
+            // add the image to the scene
+            
+            // scene.add(texMesh);
+
+            const geometry = new THREE.BoxGeometry();
+            const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+            const cube = new THREE.Mesh( geometry, material );
+            cube.scale.set(10, 10, 10);
+            cube.position.z = 25;
+            entity.add(cube);
+				  
+            scene.add(entity);
+            
+            loadModel('./models/ar_taewon.glb')
+                .then(model => {
+                    mesh = model;
+
+                    // 2.Add mesh into entity
+                    entity.add(mesh);
+
+                    // 3. Add entity to scene
+                    scene.add(entity);
+
+                });
+
+            // Render all
+            const animate = async function() {
+                requestAnimationFrame(animate);
+
+                if (mixer) {
+                    let delta = clock.getDelta();
+                    mixer.update(delta);
+                }
+
+                camera = letsee.threeRenderer().getDeviceCamera();
+                await letsee.threeRenderer().update();
+
+                renderer.render(scene, camera);
+            };
+
+            animate();
+        });
+    }
+
+    const loadModel = (path) => {
+        return new Promise((resolve) => {
+            loader.load(path, function (gltf) {
+
+                mesh = gltf.scene;
+                animations = gltf.animations;
+
+                mesh.position.x = -25;
+                mesh.position.y = -25;
+                mesh.scale.setScalar(30);
+
+                // Play model's animation
+                if (animations.length) {
+                    mixer = new THREE.AnimationMixer(mesh);
+                    let action = mixer.clipAction(animations[1]);
+                    action.play();
+                } else console.warn(`Model does not have animation`);
+
+                resolve(mesh);
+
+            }, onProgress, onError);
+        });
+    }
+
+</script>
+
+</body>
+</html>
