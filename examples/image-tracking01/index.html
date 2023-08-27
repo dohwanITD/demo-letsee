@@ -63,7 +63,19 @@
         scene.add(directionalLight);
 
         letsee.addTarget('https://api.letsee.io/targets/target-manager/target-uid/64eab879470946fee5f625d1').then(_entity => {
+            
+            
+            
             entity = _entity;
+
+            const { width, height } = entity.physicalSize;
+            const div = document.createElement('div');
+            div.style.width = width + "px";
+            div.style.height = height + "px";
+            div.style.border = '5px solid blue';
+
+            const xrElement = letsee.createXRElement(div);
+            letsee.bindXRElement(xrElement, entity);
 
             // let dom = document.createElement('div');
             // dom.id = 'container';
