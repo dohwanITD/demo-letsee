@@ -6,11 +6,17 @@
     <title>003</title>
 
      <!-- THREE.js must be supplied -->
-     <script src="https://unpkg.com/three@0.123.0/build/three.min.js"></script>
-     <script src="https://unpkg.com/three@0.123.0/examples/js/loaders/GLTFLoader.js"></script>
+     <!-- <script src="https://unpkg.com/three@0.123.0/build/three.min.js"></script>
+     <script src="https://unpkg.com/three@0.123.0/examples/js/loaders/GLTFLoader.js"></script> -->
+
+     <script src="../three/three.min.js"></script>
+     <script src="../three/GLTFLoader.js"></script>
+     <!-- <script src="../three/stats.min.js"></script> -->
 
     <!-- Replace the app key here with your own app key -->
     <script src="https://developer.letsee.io/api/webar?key=df3cf2514893523f0b3a865debb9e65cf6b42741f1ba19a557c950a7fd77ed82"></script>
+
+   
 
 </head>
 <body>
@@ -64,19 +70,8 @@
 
         letsee.addTarget('https://api.letsee.io/targets/target-manager/target-uid/64eab879470946fee5f625d1').then(_entity => {
             
-            
-            
             entity = _entity;
-
-            const { width, height } = entity.physicalSize;
-            const div = document.createElement('div');
-            div.style.width = width + "px";
-            div.style.height = height + "px";
-            div.style.border = '5px solid blue';
-
-            const xrElement = letsee.createXRElement(div);
-            letsee.bindXRElement(xrElement, entity);
-
+       
             // let dom = document.createElement('div');
             // dom.id = 'container';
 
