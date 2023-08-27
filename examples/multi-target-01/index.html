@@ -23,7 +23,7 @@
     letsee.start();
 
     // toystory
-    letsee.addTarget('https://developer.letsee.io/api-tm/target-manager/target-uid/60f0faa6130fc5b620875e25').then(entity => {
+    letsee.addTarget('https://api.letsee.io/targets/target-manager/target-uid/64ead9aa470946fee5f625d2').then(entity => {
       const { width, height } = entity.physicalSize;
       const div = document.createElement('div');
       div.style.width = width+"px";
@@ -35,12 +35,23 @@
     })
 
     // bts
-    letsee.addTarget('https://developer.letsee.io/api-tm/target-manager/target-uid/60f0fa9f332d3ccecddc27ff').then(entity => {
+    letsee.addTarget('https://api.letsee.io/targets/target-manager/target-uid/64ead9b13df93503ac4b8625').then(entity => {
       const { width, height } = entity.physicalSize;
       const div = document.createElement('div');
       div.style.width = width + "px";
       div.style.height = height + "px";
       div.style.border = '1px solid blue';
+
+      const xrElement = letsee.createXRElement(div);
+      letsee.bindXRElement(xrElement, entity);
+    });
+
+    letsee.addTarget('https://api.letsee.io/targets/target-manager/target-uid/64ead9b83df93503ac4b8626').then(entity => {
+      const { width, height } = entity.physicalSize;
+      const div = document.createElement('div');
+      div.style.width = width + "px";
+      div.style.height = height + "px";
+      div.style.border = '1px solid green';
 
       const xrElement = letsee.createXRElement(div);
       letsee.bindXRElement(xrElement, entity);
