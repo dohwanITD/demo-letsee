@@ -23,24 +23,35 @@
     letsee.start();
 
     // toystory
-    letsee.addTarget('https://api.letsee.io/targets/target-manager/target-uid/64de5bd508897503ab3aee27').then(entity => {
+    letsee.addTarget('https://api.letsee.io/targets/target-manager/target-uid/64ead9aa470946fee5f625d2').then(entity => {
       const { width, height } = entity.physicalSize;
       const div = document.createElement('div');
       div.style.width = width+"px";
       div.style.height = height+"px";
-      div.style.border = '3px solid red';
+      div.style.border = '5px solid red';
 
       const xrElement = letsee.createXRElement(div);
       letsee.bindXRElement(xrElement, entity);
     })
 
     // bts
-    letsee.addTarget('https://api.letsee.io/targets/target-manager/target-uid/64de5bc7470946fee5f625c9').then(entity => {
+    letsee.addTarget('https://api.letsee.io/targets/target-manager/target-uid/64ec31c43df93503ac4b8628').then(entity => {
       const { width, height } = entity.physicalSize;
       const div = document.createElement('div');
       div.style.width = width + "px";
       div.style.height = height + "px";
-      div.style.border = '3px solid blue';
+      div.style.border = '5px solid blue';
+
+      const xrElement = letsee.createXRElement(div);
+      letsee.bindXRElement(xrElement, entity);
+    });
+
+    letsee.addTarget('https://api.letsee.io/targets/target-manager/target-uid/64ec31b7470946fee5f625d5').then(entity => {
+      const { width, height } = entity.physicalSize;
+      const div = document.createElement('div');
+      div.style.width = width + "px";
+      div.style.height = height + "px";
+      div.style.border = '5px solid green';
 
       const xrElement = letsee.createXRElement(div);
       letsee.bindXRElement(xrElement, entity);

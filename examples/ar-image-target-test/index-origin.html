@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  <title>AR Image Target Test</title>
+
+  <!-- THREE.js -->
+  <script src="../three/three.min.js"></script>
+  <script src="../three/stats.min.js"></script>
+  
+ <!-- Replace the app key here with your own app key -->
+  <script src="https://developer.letsee.io/api/webar?key=df3cf2514893523f0b3a865debb9e65cf6b42741f1ba19a557c950a7fd77ed82"></script>
+
+<style type="text/css">
+  </style>
+
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+</head>
+
+<body style="margin: 0px; padding: 0px; overflow: hidden;">
+  <script>
+
+// https://developer.letsee.io/arDemo.html?appKey=e73de56675a09f8bb3300a9ceefe6b2aac0341e335a004ae3c9ee3ccf4cc8244&targetIdUrl=64eab879470946fee5f625d1
+
+//https://api.letsee.io/targets/target-manager/target-uid/64eab879470946fee5f625d1'
+// https://developer.letsee.io/api/webar?key=df3cf2514893523f0b3a865debb9e65cf6b42741f1ba19a557c950a7fd77ed82
+    // const searchParam = (key) => {
+    //   return new URLSearchParams(window.location.search).get(key);
+    // }
+    // let entityId = `${window.location.origin}/api-tm/target-manager/target-uid/64eab879470946fee5f625d1`;
+    let entityId = 'https://api.letsee.io/targets/target-manager/target-uid/64ec199c470946fee5f625d3';
+    let htmlElement = document.createElement('div');
+    let script = document.createElement('script');
+    // script.src = `${window.location.origin}/api/webar?key=e73de56675a09f8bb3300a9ceefe6b2aac0341e335a00`;
+    script.src = 'https://developer.letsee.io/api/webar?key=df3cf2514893523f0b3a865debb9e65cf6b42741f1ba19a557c950a7fd77ed82';
+    script.onload = () => {
+      letsee.ready(() => {
+        letsee.start();
+        letsee.addTarget(entityId).then(entity => {
+          htmlElement.id = 'container';
+          htmlElement.style.width = entity.physicalSize.width + 'px';
+          htmlElement.style.height = entity.physicalSize.height + 'px';
+          htmlElement.style.border = '2px solid #278afe';
+
+          let topElement = document.createElement('div');
+          topElement.id = 'top';
+          topElement.style.width = entity.physicalSize.width + 'px';
+          topElement.style.height = '14px';
+          topElement.style.border = '2px solid #278afe';
+          topElement.style.background = '#278afe';
+          topElement.style.position = 'absolute';
+          topElement.style.transform = 'translate(-50%, -50%)';
+          topElement.style.top = '-5%';
+          topElement.style.left = '50%';
+          topElement.style.textAlign = 'center';
+          topElement.style.color = '#fff';
+          topElement.style.fontSize = '10px';
+
+          let title = document.createElement('p');
+          title.style.fontWeight = 'bolder';
+          title.innerHTML = 'AR Image Target Test';
+          title.style.margin = '0 auto';
+          title.style.padding = '0';
+          topElement.appendChild(title);
+          htmlElement.appendChild(topElement);
+          let xrElement = letsee.createXRElement(htmlElement, entity);
+        });
+      });
+      letsee.init();
+      letsee.onTrackStart((e) => {
+        console.warn('trackstart', e);
+      });
+      letsee.onTrackEnd((e) => {
+        //console.warn('trackend',e);
+      });
+      letsee.onTrackMove((e) => {
+        //console.warn('trackmove', e);
+      })
+    };
+    document.body.append(script);
+
+  </script>
+  <!-- <script src="https://developer.letsee.io/api/webar?key=e73de56675a09f8bb3300a9ceefe6b2aac0341e335a004ae3c9ee3ccf4cc8244"></script> -->
+
+
+
+  <div id="ls_container"
+    style="position: fixed; overflow: hidden; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 100;">
+    <div id="ls_video-renderers"
+      style="position: absolute; overflow: hidden; visibility: hidden; top: 0px; left: 0px; width: 100%; height: 100%;">
+      <canvas></canvas></div>
+    <div id="ls_html-renderers"
+      style="position: absolute; overflow: hidden; visibility: hidden; top: 0px; left: 0px; width: 100%; height: 100%;">
+      <div style="transform-style: preserve-3d; width: 745px; height: 875px;"></div>
+    </div>
+  </div><video id="src_video" playsinline="true" autoplay="autoplay"></video>
+</body>
+
+</html>
