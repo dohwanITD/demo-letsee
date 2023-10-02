@@ -34,7 +34,7 @@
 <body>
   <div class="example-container">
 
-    <a-scene mindar-image="imageTargetSrc: ./marker/targets-0828.mind; 
+    <a-scene mindar-image="imageTargetSrc: ./marker/docu_starfriend.mind; 
         filterMinCF: 0.0001; filterBeta: 0.001; warmupTolerance: 5; missTolerance: 5;
         uiError:no; uiLoading:no; uiScanning: #bank_trans"
       loading-screen="enabled: false; dotsColor: #60584c; backgroundColor: #60584c"
@@ -68,9 +68,10 @@
           animation-mixer="clip: idle; loop: repeat; crossFadeDuration: 0.4; clampWhenFinished : true; startAt: 0"></a-gltf-model>
       </a-gltf-model>
                
-          <!-- <a-entity color="blue" geometry="primitive: plane" position="0 0 0" height="1" width="1" rotation="0 0 0"
-            material="opacity: 1; transparent: false">
-          </a-entity> -->
+         <!-- Debug Plane -->
+          <a-entity geometry="primitive: plane; width: 1; height: 1.41;" position="0 0 -0.01" rotation="0 0 0"
+            material="color: gray; opacity: 0.5; transparent: false">
+          </a-entity>
         </a-entity> 
 
       </a-scene>
@@ -87,7 +88,7 @@
       1px 1px 0 #000;">상품설명서를 찾아주세요
       </h2>
     <h3></h3>
-    <img width="65%" height="auto" src="./images/targets-081603.png" style="opacity : 0.7; pointer-events: none">
+    <img width="65%" height="auto" src="./marker/docu_starfriend.png" style="opacity : 0.7; pointer-events: none">
   </div>
 
   <div id='subtitleBtn' class='subtitle'>
