@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title><%= htmlWebpackPlugin.options.title %></title>
+
+  <!-- THREE.js -->
+  <script src="https://unpkg.com/three@0.121.1/build/three.min.js"></script>
+  <script src="https://mrdoob.github.io/stats.js/build/stats.min.js"></script>
+  <style media="place" type="text/css">
+  </style>
+
+  <script src="https://developer.letsee.io/api/webar?key=df3cf2514893523f0b3a865debb9e65cf6b42741f1ba19a557c950a7fd77ed82"></script>
+
+</head>
+<body>
+
+<script>
+  /**
+   * 2개 이상의 Target을 등록하는 예제 (addTarget 사용)
+   */
+  letsee.ready(() => {
+    letsee.start();
+
+    // toystory
+    letsee.addTarget('https://api.letsee.io/targets/target-manager/target-uid/651fc056579bdc04178fab91').then(entity => {
+      const { width, height } = entity.physicalSize;
+      const div = document.createElement('div');
+      div.style.width = width+"px";
+      div.style.height = height+"px";
+      div.style.border = '5px solid blue';
+
+      const xrElement = letsee.createXRElement(div);
+      letsee.bindXRElement(xrElement, entity);
+    })
+ 
+  });
+  letsee.init();
+</script>
+</body>
+</html>

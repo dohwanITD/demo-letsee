@@ -34,7 +34,7 @@
 <body>
     <div class="example-container">
 
-        <a-scene mindar-image="imageTargetSrc: ./marker/BigText-multi.mind; 
+        <a-scene mindar-image="imageTargetSrc: ./marker/BigText-WithCharSingle.mind; 
         filterMinCF: 0.0001; filterBeta: 0.001; warmupTolerance: 5; missTolerance: 5;
         uiError:no; uiLoading:no; uiScanning: #bank_trans"
             loading-screen="enabled: false; dotsColor: #60584c; backgroundColor: #60584c" embedded color-space="sRGB"
@@ -51,21 +51,7 @@
                 <a-entity geometry="primitive: plane; width: 1; height: 0.4;" position="0 0 -0.01" rotation="0 0 0"
                     material="color: blue; opacity: 0.5; transparent: false">
                 </a-entity>
-            </a-entity>
-
-            <a-entity id="example-target02" mindar-image-target="targetIndex: 1">
-                <!-- Debug Plane -->
-                <a-entity geometry="primitive: plane; width: 1; height: 0.4;" position="0 0 -0.01" rotation="0 0 0"
-                    material="color: green; opacity: 0.5; transparent: false">
-                </a-entity>
-            </a-entity>
-
-            <a-entity id="example-target03" mindar-image-target="targetIndex: 2">
-                <!-- Debug Plane -->
-                <a-entity geometry="primitive: plane; width: 1; height: 0.4;" position="0 0 -0.01" rotation="0 0 0"
-                    material="color: red; opacity: 0.5; transparent: false">
-                </a-entity>
-            </a-entity>       
+            </a-entity>     
 
         </a-scene>
     </div>

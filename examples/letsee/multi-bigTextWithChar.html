@@ -22,41 +22,39 @@
   letsee.ready(() => {
     letsee.start();
 
-   
-
-    // bts
-    letsee.addTarget('https://api.letsee.io/targets/target-manager/target-uid/651f8a8f0547f44a447b4fbe').then(entity => {
+    // toystory
+    letsee.addTarget('https://api.letsee.io/targets/target-manager/target-uid/651f9c214c739b04385f46ca').then(entity => {
       const { width, height } = entity.physicalSize;
       const div = document.createElement('div');
-      div.style.width = width + "px";
-      div.style.height = height + "px";
-      div.style.border = '5px solid green';
+      div.style.width = width+"px";
+      div.style.height = height+"px";
+      div.style.border = '5px solid blue';
 
       const xrElement = letsee.createXRElement(div);
       letsee.bindXRElement(xrElement, entity);
-    });
+    })
 
-    letsee.addTarget('https://api.letsee.io/targets/target-manager/target-uid/651f8a960547f44a447b4fbf').then(entity => {
+    letsee.addTarget('https://api.letsee.io/targets/target-manager/target-uid/651f9c2a579bdc04178fab8f').then(entity => {
       const { width, height } = entity.physicalSize;
       const div = document.createElement('div');
-      div.style.width = width + "px";
-      div.style.height = height + "px";
-      div.style.border = '5px solid red';
+      div.style.width = width+"px";
+      div.style.height = height+"px";
+      div.style.border = '5px solid blue';
 
       const xrElement = letsee.createXRElement(div);
       letsee.bindXRElement(xrElement, entity);
-    });
+    })
 
-    letsee.addTarget('https://api.letsee.io/targets/target-manager/target-uid/651f8a9deeac07041d418323').then(entity => {
+    letsee.addTarget('https://api.letsee.io/targets/target-manager/target-uid/651f9c33579bdc04178fab90').then(entity => {
       const { width, height } = entity.physicalSize;
       const div = document.createElement('div');
-      div.style.width = width + "px";
-      div.style.height = height + "px";
-      div.style.border = '5px solid gray';
+      div.style.width = width+"px";
+      div.style.height = height+"px";
+      div.style.border = '5px solid blue';
 
       const xrElement = letsee.createXRElement(div);
       letsee.bindXRElement(xrElement, entity);
-    });
+    })
   });
   letsee.init();
 </script>
