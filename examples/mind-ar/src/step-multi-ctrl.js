@@ -13,7 +13,7 @@ AFRAME.registerComponent('step-multi-ctrl', {
         const exampleTarget01 = document.querySelector('#example-target01');
         const exampleTarget02 = document.querySelector('#example-target02');
         const exampleTarget03 = document.querySelector('#example-target03');
-
+        const exampleTarget04 = document.querySelector('#example-target04');
         // arReady event triggered when ready
         // sceneEl.addEventListener("arReady", (event) => {
         //     console.log("MindAR is ready")
@@ -26,22 +26,33 @@ AFRAME.registerComponent('step-multi-ctrl', {
         //     // console.log("MindAR failed to start")
         // });
         // // detect target found
-        exampleTarget01.addEventListener("targetFound", event => {
-            console.log("target found");
-            guideDiv.style.display = 'none';
-          
-        });
 
-        exampleTarget02.addEventListener("targetFound", event => {
-            console.log("target found");
-            guideDiv.style.display = 'none';
-          
-        });
+        if(exampleTarget01){
+            exampleTarget01.addEventListener("targetFound", event => {
+                console.log("target found");
+                guideDiv.style.display = 'none';
+            });
+        }
 
-        exampleTarget03.addEventListener("targetFound", event => {
-            console.log("target found");
-            guideDiv.style.display = 'none';
-          
-        });
+        if(exampleTarget02){
+            exampleTarget02.addEventListener("targetFound", event => {
+                console.log("target found");
+                guideDiv.style.display = 'none';
+            });
+        }
+
+        if(exampleTarget03){
+            exampleTarget03.addEventListener("targetFound", event => {
+                console.log("target found");
+                guideDiv.style.display = 'none';
+            });
+        }
+
+        if(exampleTarget04){
+            exampleTarget04.addEventListener("targetFound", event => {
+                console.log("target found");
+                guideDiv.style.display = 'none';
+            });
+        }
     },
 })
