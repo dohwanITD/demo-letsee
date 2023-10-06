@@ -34,7 +34,7 @@
 <body>
     <div class="example-container">
 
-        <a-scene mindar-image="imageTargetSrc: ./marker/normalText_SM.mind; 
+        <a-scene mindar-image="imageTargetSrc: ./marker/BigText-multi.mind; 
         filterMinCF: 0.0001; filterBeta: 0.001; warmupTolerance: 5; missTolerance: 5;
         uiError:no; uiLoading:no; uiScanning: #bank_trans"
             loading-screen="enabled: false; dotsColor: #60584c; backgroundColor: #60584c" embedded color-space="sRGB"
@@ -50,7 +50,6 @@
                 <!-- Debug Plane -->
                 <a-entity geometry="primitive: plane; width: 1; height: 0.4;" position="0 0 -0.01" rotation="0 0 0"
                     material="color: blue; opacity: 0.5; transparent: false">
-                    blue - starFirend
                 </a-entity>
             </a-entity>
 
@@ -58,7 +57,6 @@
                 <!-- Debug Plane -->
                 <a-entity geometry="primitive: plane; width: 1; height: 0.4;" position="0 0 -0.01" rotation="0 0 0"
                     material="color: green; opacity: 0.5; transparent: false">
-                    green - text
                 </a-entity>
             </a-entity>
 
@@ -66,18 +64,8 @@
                 <!-- Debug Plane -->
                 <a-entity geometry="primitive: plane; width: 1; height: 0.4;" position="0 0 -0.01" rotation="0 0 0"
                     material="color: red; opacity: 0.5; transparent: false">
-                    red - YellowBorder
                 </a-entity>
-            </a-entity>
-
-            <a-entity id="example-target04" mindar-image-target="targetIndex: 3">
-                <!-- Debug Plane -->
-                <a-entity geometry="primitive: plane; width: 1; height: 0.4;" position="0 0 -0.01" rotation="0 0 0"
-                    material="color: gray; opacity: 0.5; transparent: false">
-                    Gray - BlueBorder
-                </a-entity>
-            </a-entity>
-
+            </a-entity>       
 
         </a-scene>
     </div>
