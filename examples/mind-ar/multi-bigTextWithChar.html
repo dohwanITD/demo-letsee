@@ -1,0 +1,90 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"> -->
+
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/16/Stats.min.js"></script> <!-- Stats -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js"></script> <!-- Audio -->
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.0.0/dist/aframe-extras.min.js"></script>
+    <!-- animation-mixer -->
+
+    <script src="./src/mindar-image-aframe-1280.prod.js" type="module"></script> <!-- mind-ar -->
+
+    <!--  -->
+    <link rel="stylesheet" type="text/css" href="./src/subtitle.css">
+    <script type='text/javascript' src='./src/step-multi-ctrl.js'></script>
+
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .example-container {
+            overflow: hidden;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="example-container">
+
+        <a-scene mindar-image="imageTargetSrc: ./marker/BigTect_WithChar.mind; 
+        filterMinCF: 0.0001; filterBeta: 0.001; warmupTolerance: 5; missTolerance: 5;
+        uiError:no; uiLoading:no; uiScanning: #bank_trans"
+            loading-screen="enabled: false; dotsColor: #60584c; backgroundColor: #60584c" embedded color-space="sRGB"
+            renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
+            device-orientation-permission-ui="enabled: false"
+            gltf-model="basisTranscoderPath:https://cdn.jsdelivr.net/npm/super-three/examples/js/libs/basis/;"
+            step-multi-ctrl
+            >
+
+            <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+            <a-entity id="example-target01" mindar-image-target="targetIndex: 0">
+                <!-- Debug Plane -->
+                <a-entity geometry="primitive: plane; width: 1; height: 0.4;" position="0 0 -0.01" rotation="0 0 0"
+                    material="color: blue; opacity: 0.5; transparent: false">
+                </a-entity>
+            </a-entity>
+
+            <a-entity id="example-target02" mindar-image-target="targetIndex: 1">
+                <!-- Debug Plane -->
+                <a-entity geometry="primitive: plane; width: 1; height: 0.4;" position="0 0 -0.01" rotation="0 0 0"
+                    material="color: green; opacity: 0.5; transparent: false">
+                </a-entity>
+            </a-entity>
+
+            <a-entity id="example-target03" mindar-image-target="targetIndex: 2">
+                <!-- Debug Plane -->
+                <a-entity geometry="primitive: plane; width: 1; height: 0.4;" position="0 0 -0.01" rotation="0 0 0"
+                    material="color: red; opacity: 0.5; transparent: false">
+                </a-entity>
+            </a-entity>       
+
+        </a-scene>
+    </div>
+
+    <div id="guidePanel" class="covering-panel">
+        <!-- <h5 style="color:white"></h5> -->
+        <h3></h3>
+        <h3></h3>
+        <h2 style="color:white;  text-shadow:
+      -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+      1px 1px 0 #000;">상품설명서를 찾아주세요
+        </h2>
+        <h3></h3>
+        <img width="65%" height="auto" src="./marker/wholePage-n4.png" style="opacity : 0.7; pointer-events: none">
+    </div>
+
+
+</body>
+
+</html>
