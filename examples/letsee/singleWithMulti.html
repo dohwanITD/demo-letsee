@@ -23,7 +23,7 @@
     letsee.start();
 
     // toystory
-    letsee.addTarget('https://api.letsee.io/targets/target-manager/target-uid/652613a55cf1b6041b9bdf88').then(entity => {
+    letsee.addTarget('https://api.letsee.io/targets/target-manager/target-uid/65261d90579bdc04178fab92').then(entity => {
       const { width, height } = entity.physicalSize;
       const div = document.createElement('div');
       div.style.width = width+"px";
@@ -33,10 +33,9 @@
       const xrElement = letsee.createXRElement(div);
       letsee.bindXRElement(xrElement, entity);
     })
-
     
 
-    letsee.addTarget('https://api.letsee.io/targets/target-manager/target-uid/65261d90579bdc04178fab92').then(entity => {
+    letsee.addTarget('https://api.letsee.io/targets/target-manager/target-uid/65261c6d5cf1b6041b9bdf89').then(entity => {
       const { width, height } = entity.physicalSize;
       const div = document.createElement('div');
       div.style.width = width+"px";
